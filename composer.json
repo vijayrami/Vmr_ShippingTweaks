@@ -13,8 +13,6 @@
             "name": "vijay rami"
         }
     ],
-    "minimum-stability": "dev",
-    "require": {},
     "autoload": {
         "files": [
             "registration.php"

@@ -4,7 +4,7 @@
     <default>
         <shipping>
             <behavior>
-                <tweaks>1</tweaks>
+                <tweaks>0</tweaks>
             </behavior>
         </shipping>
     </default>

@@ -1,13 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Vmr\ShippingTweaks\Helper;
 
 use Magento\Store\Model\ScopeInterface;
 use Magento\Framework\App\Helper\AbstractHelper;
 
-/**
- * Shipping Tweaks Helper
- */
 class Data extends AbstractHelper
 {
     /**
@@ -15,24 +14,11 @@ class Data extends AbstractHelper
      */
     const XML_CONFIG_ENABLED = 'shipping/behavior/tweaks';
 
-    /**
-     * Check Tweaks mode Functionality Should be Enabled
-     *
-     * @return bool
-     */
-    public function isEnabled()
+    public function isEnabled(): bool
     {
-        return $this->_getConfig(self::XML_CONFIG_ENABLED);
-    }
-
-    /**
-     * Retrieve Store Configuration Data
-     *
-     * @param   string $path
-     * @return  string|null
-     */
-    protected function _getConfig($path)
-    {
-        return $this->scopeConfig->getValue($path, ScopeInterface::SCOPE_STORE);
+        return $this->scopeConfig->isSetFlag(
+            self::XML_CONFIG_ENABLED,
+            ScopeInterface::SCOPE_STORE
+        );
     }
 }

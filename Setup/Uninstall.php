@@ -51,7 +51,7 @@ class Uninstall implements UninstallInterface
      */
     protected function removeConfig()
     {
-        $path = 'shipping/behavior';
+        $path = 'shipping/behavior/tweaks';
         /** @var \Magento\Config\Model\ResourceModel\Config\Data\Collection $collection */
         $collection = $this->configCollectionFactory->create();
         $collection->addPathFilter($path);

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Vmr\ShippingTweaks\Plugin\Shipping\Model\Rate;
 
 use Magento\Quote\Model\Quote\Address\RateResult\Method;
@@ -11,22 +13,9 @@ use Vmr\ShippingTweaks\Helper\Data as ShippingTweaksHelper;
  */
 class Result
 {
-    /**
-     * Helper
-     *
-     * @var ShippingTweaksHelper
-     */
-    protected $helper;
-
-    /**
-     * Initialize Plugin
-     *
-     * @param ShippingTweaksHelper $helper
-     */
     public function __construct(
-        ShippingTweaksHelper $helper
+        private readonly ShippingTweaksHelper $helper
     ) {
-        $this->helper = $helper;
     }
 
     /**
@@ -36,7 +25,7 @@ class Result
      * @param Method[] $result
      * @return Method[]
      */
-    public function afterGetAllRates(Subject $subject, $result)
+    public function afterGetAllRates(Subject $subject, $result): array
     {
         if (!$this->helper->isEnabled()) {
             return $result;
@@ -51,11 +40,11 @@ class Result
      * @param Method[] $result
      * @return Method[]
      */
-    public function getAllFreeRates($result)
+    public function getAllFreeRates($result): array
     {
         $rates = [];
         foreach ($result ?: [] as $rate) {
-            if ($rate->getPrice() < 0.0001) {
+            if ($rate->getPrice() < 0.0) {
                 $rates[] = $rate;
             }
         }
